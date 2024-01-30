@@ -1,6 +1,6 @@
 i will love u forever.
 
-![love for u](images/logo.png)
+![love for u](images/1.jpg)
 
 ## This is a title
 
