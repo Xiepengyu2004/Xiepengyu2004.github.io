@@ -1,7 +1,7 @@
-Hello and welcome to this blog. Edit the `index.md` file to change this content. All pages on the blog, including this one, use [Markdown](https://guides.github.com/features/mastering-markdown/). You can include images:
+i will love u forever.
 
-![Image of fast.ai logo](images/logo.png)
+![love for u](images/logo.png)
 
 ## This is a title
 
-And you can include links, like this [link to fast.ai](https://www.fast.ai). Posts will appear after this file. 
+This link [puppy for u](https://www.bilibili.com/video/BV1Lj411o7du/?spm_id_from=333.337.search-card.all.click&vd_source=19ccea6103cbb7a0d6bad85bd24c5a05). Posts will appear after this file. 
