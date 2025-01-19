@@ -1,0 +1,710 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>LaTexLearning | My Blog</title>
+    <meta name="author" content="Preciless" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>MY BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;MY BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>LaTexLearning</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/1/18
+        </span>
+        
+        <span class="category">
+            <a href="/categories/tools/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                tools
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/LaTeX/" style="color: #00bcd4">
+                    LaTeX
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="latex学习手册">LaTex学习手册</h1>
+<h3 id="前言">前言</h3>
+<p>LaTex是一种“<strong>所见非所得</strong>”的排版工具，它的重要特点就是<strong>规范性</strong>，现在几乎所有学术论文都使用LaTex进行排版，你可以把它当成word的亲戚（<strong>word是所见即所得</strong>）来理解。本学习手册是基于Dylaaan博主的<a target="_blank" rel="noopener" href="https://dylandong.top/posts/e480/">LaTex：从入门到日常使用</a>，如果你只是想了解学习各种工具，这是一篇还不错的学习手册，如果你尝试寻找更方便的日常书写工具，那么我会说绝对不会是LaTex。</p>
+<blockquote>
+<p>最高效的学习方式就是：随便拿一个别人的Latex模板，一行一行询问AI，不断学习每句语法。</p>
+</blockquote>
+<span id="more"></span>
+<h3 id="准备工作latex环境的基本概念">准备工作：LaTex环境的基本概念</h3>
+<h5 id="tex">Tex</h5>
+<p>Tex是一种具有<strong>编译</strong>和<strong>排版</strong>功能的基础语言，作用好比C语言。</p>
+<p>LaTex是Tex的<strong>扩展版本</strong>，拥有多种宏包，能实现比Tex更多的功能。</p>
+<h5 id="tex-live">Tex Live</h5>
+<p>Tex Live是一种Tex语言的发行版本，相当于C语言的编辑器Dev-c++，这种编辑器操作复杂，使用命令行输入命令，没有GUI界面，但是只靠Tex live也可以实现论文排版。你可以认为TexLive属于后端，后续更人性化的编辑器可以配合Texlive的功能进行面向用户设计。</p>
+<h5 id="tex编辑器">Tex编辑器</h5>
+<p>根据个人爱好，可以选择不同的用户友好的编辑器，比如TeXworks(新手最适合),TeXstudio等。</p>
+<ul>
+<li>TeXstudio</li>
+<li>Visual Studio Code 配置最麻烦，但是CS友好。</li>
+<li>Overleaf在线编辑器，很方便。</li>
+</ul>
+<p>具体的下载配置方式，可以请教AI或者查阅相关文档，此处不多赘述。</p>
+<h3 id="latex编写文档">LaTex编写文档</h3>
+<h5 id="文档类型">文档类型</h5>
+<p>Tex有多种<strong>文档类型</strong>可选，文档类型是用于<strong>定义文档整体格式和结构</strong>的关键命令，决定了文档的<strong>基本样式、页面布局、标题格式、字体大小</strong>等诸多方面，比较常用的有英文的<code>book</code>、<code>article</code>和<code>beamer</code>；对于中文有<code>ctexbook</code>、<code>ctexart</code>和<code>ctexbeamer</code>。就是定义一个主题框架，让作者在框架下进一步定义编写内容。</p>
+<p>这里使用<code>cteart</code>进行举例</p>
+<p>好比手写c语言，第一句就是<code>#include&lt;xxxxxx&gt;</code>，这里的第一句就是</p>
+<pre class="tex"><code>\documentclass&#123;ctexart&#125;</code></pre>
+<p>同时可以在此处设置一些参数，比如默认字体大小xxpt,纸张大小A4,单面打印</p>
+<pre class="tex"><code>\documentclass[12pt,a4paper,oneside]&#123;ctexart&#125;</code></pre>
+<p>正文需要放在document环境中，只有在document框住的内容会出现在最终论文中</p>
+<pre class="tex"><code>\documentclass[12pt, a4paper, oneside]&#123;ctexart&#125;
+
+\begin&#123;document&#125;
+
+正文. 
+
+\end&#123;document&#125;</code></pre>
+<h5 id="宏包">宏包</h5>
+<p>有一些特定的功能（定理环境），需要在<strong>导言区</strong>，即在document环境之前加载宏包，加载宏包的代码就是<code>\usepackage&#123;&#125;</code>。本学习手册与数学公式和定理环境相关的宏包是<code>amsmath</code>，<code>amsthm</code>，<code>amssymb</code>，用于插入图片的宏包是<code>graphicx</code></p>
+<pre class="tex"><code>\usepackage&#123;amsmath, amsthm, amssymb, graphicx&#125;</code></pre>
+<p>也可以分开写，还可以在加载宏包的时候设置基本参数，比如超链接宏<code>hyperref</code>设置引用颜色为黑色</p>
+<pre class="tex"><code>\usepackage[bookmarks=true, colorlinks, citecolor=blue, linkcolor=black]&#123;hyperref&#125;</code></pre>
+<h5 id="标题">标题</h5>
+<p>标题使用<code>\title&#123;&#125;</code>设置，作者使用<code>\author</code>设置，日期使用<code>\date&#123;&#125;</code>设置，这些都放在<strong>导言区</strong></p>
+<p>在文档中显式标题信息，还要加上<code>\maketitle</code></p>
+<pre class="tex"><code>\documentclass[12pt, a4paper, oneside]&#123;ctexart&#125;
+\usepackage&#123;amsmath, amsthm, amssymb, graphicx&#125;
+\usepackage[bookmarks=true, colorlinks, citecolor=blue, linkcolor=black]&#123;hyperref&#125;
+
+% 导言区
+
+\title&#123;我的第一个\LaTex文档&#125;%这个命令是现实LaTex的标准字体和格式显式这个词
+\author&#123;XXXXXX&#125;
+\date&#123;\today&#125;%这个特殊命令会自动插入当前的日期，年月日
+
+\begin&#123;document&#125;
+
+\maketitle %生成标题部分
+
+正文. 
+
+\end&#123;document&#125;</code></pre>
+<h5 id="正文">正文</h5>
+<p>正文可以直接在document环境中写，没有必要加入空格缩进，因为文档默认进行首行缩进。相邻两行在编译时还是同一段，所以另起一段中间要隔一行，正文多余的空格、回车都会被忽略。另起一页的方式是<code>\newpage</code>，在这个命令之后的名字都会在下一页显示。</p>
+<pre class="tex"><code>我是第一段. 
+
+我是第二段. </code></pre>
+<table>
+<thead>
+<tr class="header">
+<th>字体</th>
+<th>命令</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>直立</td>
+<td><code>\textup&#123;&#125;</code></td>
+</tr>
+<tr class="even">
+<td>意大利</td>
+<td><code>\textit&#123;&#125;</code></td>
+</tr>
+<tr class="odd">
+<td>倾斜</td>
+<td><code>\textsl&#123;&#125;</code></td>
+</tr>
+<tr class="even">
+<td>小型大写</td>
+<td><code>\textsc&#123;&#125;</code></td>
+</tr>
+<tr class="odd">
+<td>加宽加粗</td>
+<td><code>\textbf&#123;&#125;</code></td>
+</tr>
+</tbody>
+</table>
+<p>具体的使用方法是把要改变字体的内容放在花括号中。</p>
+<h5 id="章节">章节</h5>
+<p>对于<code>ctexart</code>文件类型，章节用<code>\section&#123;&#125;</code>和<code>\subsection&#123;&#125;</code>来标记，不同的文件类型可能有不同的方法，用到哪种具体学习就行。</p>
+<pre class="tex"><code>\documentclass[12pt, a4paper, oneside]&#123;ctexart&#125;
+\usepackage&#123;amsmath, amsthm, amssymb, graphicx&#125;
+\usepackage[bookmarks=true, colorlinks, citecolor=blue, linkcolor=black]&#123;hyperref&#125;
+
+% 导言区
+
+\title&#123;我的第一个\LaTeX 文档&#125;
+\author&#123;XXXXX&#125;
+\date&#123;\today&#125;
+
+\begin&#123;document&#125;
+
+\maketitle
+
+\section&#123;一级标题&#125;
+
+\subsection&#123;二级标题&#125;
+
+正文. 
+
+\subsection&#123;二级标题&#125;
+
+正文. 
+
+\end&#123;document&#125;</code></pre>
+<h5 id="目录">目录</h5>
+<p>有了章节结构后，直接使用<code>\tableofcontents</code>命令就可以在指定位置生成目录，有点类似于Markdown自动生成目录的<code>[TOC]</code>。通常带有目录的文件需要编译两次，一次是在目录中生成.toc文件，然后再生成目录。</p>
+<pre class="tex"><code>\documentclass[12pt, a4paper, oneside]&#123;ctexart&#125;
+\usepackage&#123;amsmath, amsthm, amssymb, graphicx&#125;
+\usepackage[bookmarks=true, colorlinks, citecolor=blue, linkcolor=black]&#123;hyperref&#125;
+
+% 导言区
+
+\title&#123;我的第一个\LaTeX 文档&#125;
+\author&#123;XXXXX&#125;
+\date&#123;\today&#125;
+
+\begin&#123;document&#125;
+
+\maketitle
+
+\tableofcontents
+\section&#123;一级标题&#125;
+
+\subsection&#123;二级标题&#125;
+
+正文. 
+
+\subsection&#123;二级标题&#125;
+
+正文. 
+
+\end&#123;document&#125;</code></pre>
+<h5 id="图片">图片</h5>
+<p>插入图片使用<code>graphicx</code>宏包，建议使用</p>
+<pre class="tex"><code>\begin&#123;figure&#125;[htbp]
+    \centering
+    \includegraphics[width=8cm]&#123;图片.jpg&#125;
+    \caption&#123;图片标题&#125;
+\end&#123;figure&#125;</code></pre>
+<p>其中<code>[htbp]</code>的作用是自动选择插入图片的最优位置，<code>\centering</code>设置让图片居中，<code>[width=8cm]</code>设置了图片的宽度是8cm，<code>\caption&#123;&#125;</code>用于设置图片的标题。</p>
+<h5 id="表格">表格</h5>
+<p>可以使用<a target="_blank" rel="noopener" href="https://www.tablesgenerator.com/#">Create LaTeX tables online – TablesGenerator.com</a>生成完表格代码，然后再复制到正文。</p>
+<pre class="tex"><code>\begin&#123;table&#125;[htbp]
+    \centering
+    \caption&#123;表格标题&#125;
+    \begin&#123;tabular&#125;&#123;ccc&#125;
+        1 &amp; 2 &amp; 3 \\
+        4 &amp; 5 &amp; 6 \\
+        7 &amp; 8 &amp; 9
+    \end&#123;tabular&#125;
+\end&#123;table&#125;</code></pre>
+<h5 id="列表">列表</h5>
+<p>LaTeX的列表环境有无序列表<code>itemize</code>，有序列表<code>enumerate</code>和描述<code>description</code>，以<code>enumerate</code>为例，用法如下</p>
+<pre class="tex"><code>\begin&#123;enumerate&#125;
+    \item first; 
+    \item second;
+    \item finally. 
+\end&#123;enumerate&#125;</code></pre>
+<p>默认的item就是1.2.3，但是也可以修改具体样式比如</p>
+<pre class="tex"><code>\begin&#123;enumerate&#125;
+    \item[(1)] first; 
+    \item[(2)] second;
+    \item[(3)] finally. 
+\end&#123;enumerate&#125;</code></pre>
+<p>那么前面的标号就变成了(1),(2),(3)。</p>
+<h5 id="定理环境">定理环境</h5>
+<p>定理的环境(比如定理，引理，命题，推论)需要使用<code>amsthm</code>宏包，在导言区加入</p>
+<pre class="tex"><code>\newtheorem&#123;theorem&#125;&#123;定理&#125;[section]</code></pre>
+<p>这句话定义了一个新的定理环境，<code>&#123;theorem&#125;</code>是环境的名称，<code>&#123;定理&#125;</code>是新环境的标题，每当使用这个环境就会显示“定理”二字，<code>[section]</code>是编号范围，在这里范围就是section即定理的编号按章节进行编号，如果希望编号是全局的那么省略这个字段即可。</p>
+<p>接着在文章中间，可以写入</p>
+<pre class="tex"><code>\begin&#123;theorem&#125;[定理名称]
+    这里是定理的内容. 
+\end&#123;theorem&#125;</code></pre>
+<p><code>[定理名称]</code>不是必须的，同时也可以建立新的环境，如果新的环境要与theorem一起计数，可以这样写</p>
+<pre class="tex"><code>\newtheorem&#123;theorem&#125;&#123;定理&#125;[section]
+\newtheorem&#123;definition&#125;[theorem]&#123;定义&#125;
+\newtheorem&#123;lemma&#125;[theorem]&#123;引理&#125;
+\newtheorem&#123;corollary&#125;[theorem]&#123;推论&#125;
+\newtheorem&#123;example&#125;[theorem]&#123;例&#125;
+\newtheorem&#123;proposition&#125;[theorem]&#123;命题&#125;</code></pre>
+<p>定理的证明可以直接使用<code>proof</code>环境</p>
+<h5 id="页面">页面</h5>
+<p>一开始设置的页面大小是a4paper，也可以修改为5bpaper，一般情况下LaTeX默认页边距很大，如果想要每一页显示内容更多，可以使用<code>geometry</code>宏包，在导言区加入下代码修改边距。</p>
+<pre class="tex"><code>\usepackage&#123;geometry&#125;
+\geometry&#123;left=2.54cm, right=2.54cm, top=3.18cm, bottom=3.18cm&#125;</code></pre>
+<p>设置行间距使用下面命令，不需要导入宏。</p>
+<pre class="tex"><code>\linespread&#123;1.5&#125;</code></pre>
+<h5 id="页码">页码</h5>
+<p>默认页码是阿拉伯数字编号，但是用户可以修改成小写罗马数字，一般放在导言区，或者从某个位置开始使用罗马数字</p>
+<pre class="tex"><code>\pagenumbering&#123;roman&#125;</code></pre>
+<p><code>aiph</code>表示小写字母，<code>Aiph</code>表示大写字母，<code>Roman</code>表示大写罗马字母，<code>arabic</code>表示默认的阿拉伯数字。如果要设置页码，可以使用这句话来设置页码从0开始，一般放在导言区，放在特定部分重置页号。</p>
+<pre class="tex"><code>\setcounter&#123;page&#125;&#123;0&#125;</code></pre>
+<h3 id="数学公式的输入方式">数学公式的输入方式</h3>
+<h5 id="行内公式">行内公式</h5>
+<p>行内公式通常使用<code>$...$</code>来输入，这个就叫公式环境</p>
+<pre class="tex"><code>若$a&gt;0$,$b&gt;0$,则$a+b&gt;0$</code></pre>
+<p>公式环境通常使用特殊的字体，并且默认斜体。所有的公式都要放在<strong>公式环境</strong>当中，但是行内公式的显示跟行间有所不同，比如行内公式下标会压缩右移，<code>$\lim_&#123;n\to\infty&#125;x_n=x$</code>显示为<span class="math inline">\(\lim_{n\to\infty}x_n=x\)</span>，但是可以在之前加上<code>\displaystyle</code>得到<code>$\displaystyle\lim_&#123;n\to\infty&#125;x_n=x$</code>，即显示成<span class="math inline">\(\displaystyle\lim_{n\to\infty}x_n=x\)</span></p>
+<h5 id="行间公式">行间公式</h5>
+<p>行间公式用<code>$$..$$</code>包括</p>
+<pre class="tex"><code>$$
+a+b&gt;0
+$$</code></pre>
+<p>在Markdown中也可以使用类似的语法，因为大多Markdown编辑器都内置了Latex的公式，</p>
+<h5 id="上下标">上下标</h5>
+<p>上标使用<code>^</code>，比如<code>a^n</code>显示为<span class="math inline">\(a^n\)</span>，下标使用<code>_</code>，<code>a_n</code>显示为<span class="math inline">\(a_n\)</span>。上下标只会读取第一个字符，如果上下标内容比较多，就需要改成<code>^&#123;&#125;</code>或者<code>_&#123;&#125;</code></p>
+<h5 id="分式">分式</h5>
+<p>分式可以使用<code>$\dfrac&#123;a&#125;&#123;b&#125;$</code>,<code>$\frac&#123;a&#125;&#123;b&#125;$</code>，区别就是dfrac显示大frac显示小，<span class="math inline">\(\dfrac{a}{b}\)</span>和<span class="math inline">\(\frac{a}{b}\)</span>。如果我们的分式作为指数等需要显示偏小，使用frac更合适，比如<span class="math inline">\(a^\frac{c}{d}\)</span></p>
+<h5 id="括号">括号</h5>
+<p>括号可以直接使用<code>()</code>来表示，如果括号的内容比较高大，可以改用<code>\left(...\right)</code>；比如</p>
+<p><code>$(1+\frac&#123;1&#125;&#123;n&#125;)^n$</code>显示<span class="math inline">\((1+\frac{1}{n})^n\)</span>以及<code>$\left(1+\dfrac&#123;1&#125;&#123;n&#125; \right)^n$</code>显示<span class="math inline">\(\left(1+\dfrac{1}{n} \right)^n\)</span></p>
+<p>如果括号需要<strong>中间使用<code>|</code>隔开</strong>，在<code>|</code>前输入<code>\middle</code> 比如<code>$\left(..\middle|.. \right)$</code>显示为<span class="math inline">\(\left(..\middle |... \right)\)</span>，这个竖线就会根据左右的公式自动调整长度。</p>
+<p>如果需要在公式块输入大括号，一般来说不会显示出来，但是通过转义符<code>\</code>，<code>$\&#123;..\&#125;$</code>可以起到显式大括号<span class="math inline">\(\{\}\)</span></p>
+<h5 id="加粗">加粗</h5>
+<p>对于加粗的公式，可以使用<code>bm</code>宏包，<code>\bm&#123;&#125;</code>可以用来加粗公式同时保留公式的斜体，但是一般<strong>不会内置公式加粗功能</strong>。</p>
+<h5 id="大括号">大括号</h5>
+<p>这里使用<code>cases</code>环境，大括号可以用于分段函数或者是方程组</p>
+<pre class="tex"><code>$$
+f(x)=\begin&#123;cases&#125;
+    x, &amp; x&gt;0, \\
+    -x, &amp; x\leq 0.
+\end&#123;cases&#125;
+$$</code></pre>
+<p><span class="math display">\[
+f(x)=\begin{cases}
+    x, &amp; x&gt;0, \\
+    -x, &amp; x\leq 0.
+\end{cases}
+\]</span></p>
+<pre class="latex"><code>f(x) = \begin&#123;cases&#125;
+  expression1, &amp; condition1, \\
+  expression2, &amp; condition2, \\
+  ...
+  expressionN, &amp; conditionN.
+\end&#123;cases&#125;</code></pre>
+<p>在数学中，<code>cases</code>环境用来定义分段函数，每个expression是函数满足相应condition时的表达式，每个condition定义了表达式的自变量取值范围。</p>
+<h5 id="多行公式">多行公式</h5>
+<p>多行公式可以使用<code>aligned</code>环境，其中<code>&amp;</code>的作用是指定对齐点，这里就是等号后对齐</p>
+<pre class="tex"><code>$$
+\begin&#123;aligned&#125;
+a &amp; =b+c \\
+&amp; =d+e
+\end&#123;aligned&#125;
+$$</code></pre>
+<p><span class="math display">\[\begin{aligned}a &amp; =b+c \\ &amp; =d+e\end{aligned}\]</span></p>
+<p>我可以改变一下对齐点的位置</p>
+<pre class="tex"><code>$$
+\begin&#123;aligned&#125;
+a &amp; =b+c \\
+ =&amp;d+e
+\end&#123;aligned&#125;
+$$</code></pre>
+<p><span class="math display">\[
+\begin{aligned}
+a &amp; =b+c \\
+ =&amp;d+e
+\end{aligned}
+\]</span></p>
+<h5 id="矩阵和行列式">矩阵和行列式</h5>
+<p>矩阵可以使用<code>bmatrix</code>环境和<code>pmatrix</code>环境，分别是方括号和圆括号，如果输入行列式使用<code>vmatrix</code>环境</p>
+<pre class="tex"><code>$$
+\begin&#123;bmatrix&#125;
+    a &amp; b \\
+    c &amp; d
+\end&#123;bmatrix&#125;
+$$</code></pre>
+<p><span class="math display">\[
+\begin{bmatrix}
+    a &amp; b \\
+    c &amp; d
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+\begin{pmatrix}
+    a &amp; b \\
+    c &amp; d
+\end{pmatrix}
+\]</span></p>
+<p><span class="math display">\[
+\begin{vmatrix}
+    a &amp; b \\
+    c &amp; d
+\end{vmatrix}
+\]</span></p>
+<h5 id="公式添加序号">公式添加序号</h5>
+<p><code>$$......\tag1$$</code>或者使用<code>$$.....\tag&#123;1.1&#125;$$</code>分别如下 <span class="math display">\[
+a+b \tag1
+\]</span></p>
+<p><span class="math display">\[
+a+b \tag{1.1}
+\]</span></p>
+<h5 id="更改字母颜色">更改字母颜色</h5>
+<p>比如<code>$a\color&#123;green&#125;+b$</code>那么公式从+开始都是绿色，如果只需要改个别字母必须在字母前后都改color，后面那次用来改回黑色。<span class="math inline">\(a\color{green}+b\)</span>，<span class="math inline">\(a\color{green}+\color{black}b\)</span></p>
+<h5 id="希腊字母">希腊字母</h5>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">LaTex表达形式</th>
+<th style="text-align: center;">对应希腊字母</th>
+<th style="text-align: center;">LaTex表达形式</th>
+<th style="text-align: center;">对应希腊字母</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\alpha\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\Alpha\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\beta\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\Beta\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\gamma\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\Gamma\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\delta\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\Delta\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\epsilon\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\Epsilon\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\zeta\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\Zeta\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\eta\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\Eta\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\theta\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\Theta\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\iota\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\Iota\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\kappa\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\Kappa\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\lambda\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\Lambda\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\mu\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\Mu\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\nu\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\Nu\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\xi\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\Xi\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\omicron\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\Omicron\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\pi\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\Pi\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\rho\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\Rho\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\tau\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\Tau\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\upsilon\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\Upsilon\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\varphi\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\Phi\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\chi\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\Chi\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\psi\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\Psi\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\omega\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\Omega\)</span></td>
+</tr>
+</tbody>
+</table>
+<h5 id="导数极限">导数、极限</h5>
+<p><code>&#123;f&#125;'(x)=x^2+x'</code>即<span class="math inline">\({f}&#39;(x)=x^2+x\)</span></p>
+<p><code>\lim_&#123;x\to 0&#125;\frac&#123;3x^2 +7x^3&#125;&#123;x^2+5x^4&#125; = 3</code>即<span class="math inline">\(\lim_{x \to 0} \frac {3x ^2 +7x^3} {x^2 +5x^4} = 3\)</span></p>
+<h5 id="todo">TODO</h5>
+<p>具体的手册可以查阅<a target="_blank" rel="noopener" href="https://viatorsun.blog.csdn.net/article/details/82826664?fromshare=blogdetail&amp;sharetype=blogdetail&amp;sharerId=82826664&amp;sharerefer=PC&amp;sharesource=qq_35819724&amp;sharefrom=from_link">CSDN博客</a></p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2024 - 2025 My Blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Preciless
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>

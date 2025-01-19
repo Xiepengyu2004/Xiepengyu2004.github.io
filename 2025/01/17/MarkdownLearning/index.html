@@ -1,0 +1,484 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>MarkdownLearning | My Blog</title>
+    <meta name="author" content="Preciless" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>MY BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;MY BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>MarkdownLearning</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/1/17
+        </span>
+        
+        <span class="category">
+            <a href="/categories/tools/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                tools
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/markdown/" style="color: #00a596">
+                    markdown
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="markdown学习手册">Markdown学习手册</h1>
+<h3 id="简介">简介</h3>
+<p>Markdown是一种<strong>轻量级标记语言</strong>，允许人们使用<strong>易读易写</strong>的纯文本格式编写文档，Markdown文件名后缀是“.md”，本手册内容是基于中文版的<a target="_blank" rel="noopener" href="https://markdown.com.cn/">学习网站</a>，可以简单学习一下功能，到具体的使用时再查找命令，本手册不介绍Markdown关于HTML的相关功能。我推荐使用Typora等编辑器能够更方便灵活地编辑Markdown文档，但是这不意味着我们可以不对Markdown语言的底层逻辑进行学习，在某些情况下或许直接使用Markdown的语法而非Typora的快捷键会大大提高工作效率。</p>
+<span id="more"></span>
+<blockquote>
+<p>不同的Markdown应用软件可能会遵循不同的规范，比如Typora是Github Flavored Markdown标准，仅支持栅栏式代码块，不支持原始代码块，而且数学公式，流程图，时序图更好渲染，也许其它的规范做不好这些。在新平台发现MD文件渲染失败的部分，那就根据新平台的规范修改原md文档，但大多数内容是各平台统一的规范。</p>
+<p>你可以认为Typora只是一个为md语言提供了许多快捷键以及直接进行渲染的软件，在他的编辑模式下，所见即所得，不需要区分编辑视图和执行渲染视图。</p>
+<p>Markdown 语法的首要设计目标是尽可能易读。基于这个目标，Markdown 格式的文档能够以纯文本形式原样发布，而不会看起来像被填满了标签或格式化指令。</p>
+</blockquote>
+<h3 id="标题语法">标题语法</h3>
+<p><strong>创建标题</strong>，只需要在一句话前面添加一个井号即可 <code>#</code>，添加几个井号就是几级标题。直接把Typora切换成源码模式就可以简单了解到了，或者自己尝试打几个井号试试。</p>
+<p>还可以通过在文本下方加若干个<code>=</code>号来标识一级标题，<code>-</code>号来标识二级标题。（这一条Typora就不支持，所以<strong>不建议使用</strong>，直接用第一种通用方法即可）</p>
+<p>要注意的就是<strong>建议井号与题目要空格隔开</strong>以适应不同的应用处理程序。</p>
+<h3 id="段落语法">段落语法</h3>
+<p>使用<strong>空白的一整行</strong>来划分段落，如果两行之间只用回车换行，最后第二行显示仍然是接在后面的。</p>
+<p>严格来说，<strong>不要使用空格或者制表符来缩进段落</strong>，但其实你喜欢也没关系，怎么舒服怎么来。</p>
+<h3 id="换行语法">换行语法</h3>
+<p>在一行的<strong>末尾添加两个或者多个空格</strong>，然后<strong>再按回车</strong>就可以自动创建换行符了，这个叫做<strong>结尾空格</strong></p>
+<p>在Typora的图形渲染界面中，其实没有刻意的实现换行语法，但是你可以使用源代码模式一个空格加换行来达到这种目的，正常形式的段落就是单行显示满了就换行，而在Typora中按回车键是创建新的段落。</p>
+<h3 id="强调语法">强调语法</h3>
+<p><strong>粗体</strong>，加粗文本，只需要在单词短语的前后<strong>各加两个星号</strong>或者两个下划线即可，如<strong>加粗</strong>，<strong>下划线加粗</strong>，规范性标准只用星号就行。</p>
+<p><strong>斜体</strong>，只需要在单词短语前后<strong>各加一个星号</strong>即可，比如<em>斜体</em>，<em>下划线斜体</em>，规范性标准一样，只用星号就行。</p>
+<p><strong>粗斜体</strong>，同上<strong>加三个星号</strong>或三个下划线，<strong><em>又粗又斜</em></strong></p>
+<h3 id="引用语法">引用语法</h3>
+<p><strong>单段落引用</strong>，在段落前加<code>&gt;</code>即可，比如本文档的简介部分最后就是引用的渲染内容</p>
+<p><strong>多段落引用</strong>，每行前加<code>&gt;</code>，本文档的简介部分最后也是多段落引用，空白行也要加<code>&gt;</code>，否则就是两个引用</p>
+<p><strong>嵌套块引用</strong>，可以在块引用中再嵌套一个，</p>
+<blockquote>
+<p>Dorothy followed her through many of the beautiful rooms in her castle.</p>
+<blockquote>
+<p>The Witch bade her clean the pots and kettles and sweep the floor and keep the fire fed with wood.</p>
+</blockquote>
+</blockquote>
+<p>带有其它元素的块引用，块引用可以包含其它Markdown格式的元素，并非所有元素都可以使用，你需要进行实验看看哪些有用。</p>
+<blockquote>
+<h4 id="the-quarterly-results-look-great">The quarterly results look great!</h4>
+<ul>
+<li>Revenue was off the chart.</li>
+<li>Profits were higher than ever.</li>
+</ul>
+<p><em>Everything</em> is going according to <strong>plan</strong>.</p>
+</blockquote>
+<h3 id="列表语法">列表语法</h3>
+<blockquote>
+<p>列表语法可以将多个条目组织成有序或无序列表</p>
+</blockquote>
+<h5 id="有序列表">有序列表</h5>
+<p><strong>要创建有序列表</strong>，就需要在每个列表项前添加数字并紧跟一个英文句点，数字不必按数学顺序排列，但是列表当以数字1开始。</p>
+<ol type="1">
+<li>a</li>
+<li>b</li>
+<li>c</li>
+</ol>
+<p>有趣的一点就是，在源代码模式下，下面两种情况都会被组织成1，2，3，4顺序，但是没什么必要非这么写。</p>
+<pre class="markdown"><code>1. First item
+8. Second item
+3. Third item
+5. Fourth item
+
+1. First item
+1. Second item
+1. Third item
+1. Fourth item</code></pre>
+<p><strong>有序列表的嵌套</strong></p>
+<ol type="1">
+<li>a</li>
+<li>b
+<ol type="1">
+<li>b1</li>
+<li>b2</li>
+</ol></li>
+<li>c</li>
+</ol>
+<h5 id="无序列表">无序列表</h5>
+<p><strong>创建无序列表</strong>，其实就是从开头到现在每个小标题下的多个实心点，就在每个列表项前加<code>-</code>、<code>*</code>、<code>+</code>都可以实现目的，比如下面</p>
+<ul>
+<li><p>a</p></li>
+<li><p>b</p></li>
+<li><p>c</p></li>
+<li><p>支持无序列表的嵌套，缩进一个或多个列表项即可</p></li>
+<li><p>但是通常<strong>不建议混用</strong>加减星，固定用一种即可</p></li>
+</ul>
+<h5 id="在列表中嵌套其它内容">在列表中嵌套其它内容</h5>
+<p>如果要保留列表的连续性，并且在列表中添加另一种元素，要把元素缩进成<strong>四个空格或者一个制表符</strong>，可以嵌套图片，列表，代码块</p>
+<ul>
+<li><p>This is the first list item.</p></li>
+<li><p>Here's the second list item.</p>
+<blockquote>
+<p>I need to add another paragraph below the second list item.</p>
+</blockquote>
+<ul>
+<li>列表</li>
+</ul>
+<pre class="markdown"><code></code></pre></li>
+<li><p>And here's the third list item.</p></li>
+<li><p>其实在很多Markdown应用程序中，<strong>并没有对空格数量那么严格</strong>，还是一个根本原则，用户怎么用的舒服怎么来，<strong>本手册只是简单了解一下基本原理</strong>，在使用的时候，根据实际情况取精华弃糟粕。（Typora的源代码模式甚至有很多的空白行，关于嵌套内容也只是两个空格就可以了，取决于解析算法）</p></li>
+</ul>
+<h3 id="代码语法">代码语法</h3>
+<p>单行代码，直接加反引号<code>int a=1;</code></p>
+<p>转义反引号，如果代码中要包含反引号，就需要双反引号来包含代码行，比如<code>int `a`=5;</code></p>
+<p>创建代码块直接三个反引号即可（<strong>围栏式代码块</strong>），在第一行后加入代码类型</p>
+<pre class="java"><code>int a=5;</code></pre>
+<h3 id="分割线语法">分割线语法</h3>
+<p>单行只有三个<code>-</code>、<code>*</code>、<code>_</code>，并且不含其它内容</p>
+<hr />
+<hr />
+<hr />
+<h3 id="链接语法">链接语法</h3>
+<p><strong>链接文本</strong>放在中括号内，<strong>链接地址</strong>放在后界面的括号中，<strong>链接title可选</strong><code>[超链接显示名](超链接地址 “超链接title”)</code>，链接title是鼠标移动到上面时会显示的内容。</p>
+<p><a target="_blank" rel="noopener" href="https://markdown.com.cn/%20”QQ“">Markdown语法</a></p>
+<p>如果是网址和Email地址，可以直接用尖括号把URL以及Email地址变成可点击链接</p>
+<p><code>&lt;https://www.baidu.com&gt;</code></p>
+<p><strong>带格式化链接</strong>，可以在链接语法前后增加星号来<strong>强调链接</strong>，也可以在方括号中添加反引号对来把链接标识成代码，<strong><a target="_blank" rel="noopener" href="https://www.baidu.com">Baidu</a></strong>，<em><a target="_blank" rel="noopener" href="https://www.baidu.com">Baidu</a></em>，<a target="_blank" rel="noopener" href="https://www.baidu.com"><code>Baidu</code></a></p>
+<p><strong>引用类型链接</strong>，这是一种特殊的链接，它使URL在Markdown文档中<strong>更易于显示和阅读</strong>，主要是分为两部分，与文本保持内联部分以及存储在文件中其它位置的部分，<strong>以易于阅读</strong>。</p>
+<ul>
+<li><p>第一部分格式，只需要两组方括号就行，第一组设置<strong>显示链接的文本名字</strong>，第二组设置一个<strong>标签</strong>（这个标签不区分大小写，可以包含字母数字空格或标点），这个标签指向存储在文档其它位置的链接，看起来是不是有点像脚注了。</p>
+<pre class="markdown"><code>[tablename][1]</code></pre></li>
+<li><p>第二部分格式，1-放在括号中的标签后面要紧跟一个冒号和空格<code>[label]:</code>2-链接的URL，可以选择把它括在尖括号中3-链接的可选标题，可以括在<strong>双引号</strong>，单引号或者括号中。第二部分内容可以放在任意位置，大部分人放在文档末尾或者第一部分出现的段落之后。</p>
+<pre class="markdown"><code>[1]: https://www.baidu.com
+[1]: https://www.baidu.com &quot;TableName&quot;
+[1]: https://www.baidu.com &#39;TableName&#39;
+[1]: https://www.baidu.com (TableName)
+[1]: &lt;https://www.baidu.com&gt; &quot;TableName&quot;</code></pre></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.baidu.com">ref link</a></p>
+<h3 id="图片语法">图片语法</h3>
+<p><strong>图片</strong>，要使用感叹号<code>!</code>打头，接着方括号增加<strong>替代文本</strong>(当图片无法显示，这段文本就会显示)，<strong>图片链接</strong>(可以放<strong>相对寻址</strong>，也可以放绝对寻址，更建议用相对寻址可以多平台移植)放在圆括号里，括号里的链接可以增加一个可选的<strong>图片标题文本</strong>（把鼠标移动到上面的时候会显示）</p>
+<p><strong>基本语法</strong>，<code>![图片alt](图片链接 “图片title”)</code></p>
+<p>示例<code>![这是图片](/assets/img/philly-magic-garden.jpg "Magic Gardens")</code></p>
+<p><strong>链接图片</strong>，给图片增加超链接，那么就可以点击图片跳转链接了，就是把图片整体放置在链接语法的方框里。</p>
+<pre class="markdown"><code>[![沙漠中的岩石图片](/assets/img/shiprock.jpg &quot;Shiprock&quot;)](https://markdown.com.cn)</code></pre>
+<p><code>[![Just a Example](\\.assets\0.0.png)](https://www.baidu.com)</code></p>
+<h3 id="转义字符语法">转义字符语法</h3>
+<p>要显示原本用于格式化Markdown文档的字符，就需要添加反斜杠字符<code>\</code>比如，我在段首使用*而不是要创建无序列表，就要加转义符</p>
+<p>可以做转义的字符，<code>\ \</code> * _ () {} [] # + - . ! |`</p>
+<p>特殊字符自动转义（TODO但跟HTML有关）</p>
+<h3 id="内嵌html标签">内嵌HTML标签</h3>
+<p>TODO</p>
+<hr />
+<p>以上就是所有Markdown的基本语法，接下来要学习一下扩展语法，对基本功能进行扩展，使得Markdown功能更强大，要注意的是扩展语法并不是全部全平台可用的。</p>
+<h3 id="表格">表格</h3>
+<p>添加表格，可以使用三个或者多个连字符('---')创建每列的标题，并使用管道符<code>|</code>分割每列，单元格好像可以通过调整连字符的数量来控制宽度，这个根据具体的编辑器决定，Typora就不支持。</p>
+<p>如果需要对齐，可以在连字符的左侧，右侧或者两侧添加冒号，分别是左对齐，右对齐和居中</p>
+<blockquote>
+<p>您可以在表格中设置文本格式。例如，您可以添加链接，代码（仅反引号（```）中的单词或短语，而不是代码块）和强调。</p>
+<p>您不能添加标题，块引用，列表，水平规则，图像或HTML标签。</p>
+</blockquote>
+<p>如果需要在表中显示管道符，就使用<code>\</code>转义试试。</p>
+<pre class="markdown"><code>| Syntax      | Description |
+| ----------- | ----------- |
+| Header      | Title       |
+| Paragraph   | Text        |</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th>Syntax</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Header</td>
+<td>Title</td>
+</tr>
+<tr class="even">
+<td>Paragraph</td>
+<td>Text</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Syntax</th>
+<th style="text-align: center;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Header|</td>
+<td style="text-align: center;">Title</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Paragraph</td>
+<td style="text-align: center;">Text</td>
+</tr>
+</tbody>
+</table>
+<h3 id="围栏代码块">围栏代码块</h3>
+<p>之前在原始代码块的地方已经讲过了，因为Typora不支持原始代码的写法，所以就没有讲，这里可以补充一下原始代码块的写法：在代码块的每一行缩进至少四个空格或者一个制表符就行，个人觉得原始代码块可以淘汰掉了。</p>
+<pre class="markdown"><code>    &amp;lt;html&gt;
+      &amp;lt;head&gt;
+      &amp;lt;/head&gt;
+    &amp;lt;/html&gt;</code></pre>
+<h3 id="脚注">脚注</h3>
+<p>脚注的作用是添加注释和参考，并且不会使文档正文混乱。创建脚注时，带脚注的上标数字会出现在实际添加脚注参考的位置，读者可以点击链接或者跳转页面底部查看。</p>
+<p>第一步是创建脚注参考使用<code>[^1]</code>，必备一个插入符和一个标识符，标识符可以是数字单词，<strong>但是不含空格制表符</strong>，标识符是用来关联脚注参考和脚注本身，<strong>脚注按顺序编号</strong>。</p>
+<p>第二步就是在文本任意位置，通常是文末，加入<code>[^name]: Description</code></p>
+<p>脚注<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> 脚注<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<h3 id="标题编号">标题编号</h3>
+<p>许多Markdown处理器支持标题自定义ID，自定义ID允许<strong>直接链接到标题</strong>并使用CSS对其修改。需要添加自定义标题ID，在于标题相同的行上<strong>用大括号括起自定义ID</strong></p>
+<pre class="markdown"><code>### My Great Heading &#123;#custom-id&#125;</code></pre>
+<p>通过创建带有符号<code>#</code>和自定义标题ID的标准链接，就可以连接到文件中具有自定义ID的标题，<code>[uuuu](#aaa)</code></p>
+<p><strong>这一块的内容我基本没用过，也不是特别理解，可以后续遇到再学习。</strong></p>
+<h3 id="定义列表">定义列表</h3>
+<p>某些Markdown处理器允许创建术语及其对应定义的定义列表，基本方式就是第一行输入术语，下一行输入冒号，后面跟空格和定义，Typora貌似不支持，呈现出的效果就好像定义前加了制表符而已。</p>
+<pre class="markdown"><code>First Term
+: This is the definition of the first term.
+
+Second Term
+: This is one definition of the second term.
+: This is another definition of the second term.</code></pre>
+<h3 id="删除线">删除线</h3>
+<p>直接在一句话前后各加入两个波浪号就行，使用删除线指示某些单词是错误的，要从文档中删除。</p>
+<p><del>我的英语很好</del>，但其实你想怎么表达都行，也许可以包含讽刺意味。</p>
+<h3 id="任务列表语法">任务列表语法</h3>
+<p>任务列表可以帮助创建有复选框的项目列表，常常用来设计Todolist，完成的任务要填入x，未完成的任务填入空格。</p>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" checked="" />
+Study Markdown</li>
+<li><input type="checkbox" disabled="" />
+Study Cet-6</li>
+</ul>
+<pre class="markdown"><code>- [x] balabala
+- [ ] bilibili</code></pre>
+<h3 id="使用emoji表情">使用Emoji表情</h3>
+<p>有两种方式可以把表情符号添加到Markdown文档中：1-把表情符号复制并粘贴到Markdown文本中，2-使用emoji shortcodes</p>
+<h5 id="复制粘贴表情符号">复制粘贴表情符号</h5>
+<p>绝大多数情况，只需要用各种来源复制表情符号粘贴就行</p>
+<h5 id="使用表情符号简码">使用表情符号简码</h5>
+<p>某些Markdown应用程序允许输入表情符号短代码来插入表情，基本格式<code>:shortcodes:</code>用两个冒号括住一个短代码，比如:tent: :joy:，如果使用Typora，它会自动检索相关的表情列表供选择，只需要一个冒号然后开始输入英文。</p>
+<h3 id="自动网址链接">自动网址链接</h3>
+<p>许多的Markdown处理器会自动将URL转换为链接。这意味着如果您输出http://www.baidu.com，处理器会<strong>自动转换成链接</strong></p>
+<p>如果你不希望自动链接URL，可以用反引号包括这条链接（相当于代码块）来只输出网址文本<code>http://www.baidu.com</code>。</p>
+<h3 id="to-be-continued">To be continued</h3>
+<p>当然Markdown不止如此，比如还有数学公式和数学公式块的内容，在实际的学习中掌握基本语法和扩展语法就可以书写一个相当漂亮的Markdown文档，强烈建议你找到一个自己喜欢的Markdown编辑器，一个喜欢的Markdown规约。Ok,talk is cheap,please take the first step!</p>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>这是一个脚注<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>没啥好说的<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2024 - 2025 My Blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Preciless
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
