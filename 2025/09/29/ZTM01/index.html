@@ -1,0 +1,751 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>ZTM 01 - PyTorch Workflow Fundamentals | My Blog</title>
+    <meta name="author" content="Xpyyyy" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.png" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>MY BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;MY BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>ZTM 01 - PyTorch Workflow Fundamentals</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/9/29
+        </span>
+        
+        <span class="category">
+            <a href="/categories/PyTorch/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                PyTorch
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/PyTorch/" style="color: #03a9f4">
+                    PyTorch
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/DeepLearning/" style="color: #00bcd4">
+                    DeepLearning
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <blockquote>
+<p>ZTM 00 课后题补充</p>
+<p><code>torch.cuda.manual_seed(123)</code>可以为GPU设置随机种子，CPU和每个GPU的随机生成器是独立的，下次在<code>torch.rand(1,3,device=&quot;cuda&quot;)</code>写明后，就会使用GPU自己的随机生成器，但是如果是<code>torch.rand(1,3).to(&quot;cuda&quot;)</code>随机种子就不生效，因为他是在CPU上创建后移动到GPU的</p>
+<p><code>a.to(&quot;cuda&quot;)</code>可以把张量移动到GPU上，但是这里不是原地操作，会返回一个新的张量，注意要使用<code>a=</code>进行赋值</p>
+</blockquote>
+<p><strong>Introduction to PyTorch workflow</strong></p>
+<blockquote>
+<p>ML包括DL的核心就是：收集过去的数据，建立算法模型去寻找其中的模式，用发现的模式预测未来。</p>
+<p>为了简单讲解编程原理和结构组成，这里使用最简单的模型，线性模型</p>
+</blockquote>
+<ul>
+<li>基本的工作流如下<ul>
+<li>1 - 准备数据，把现实生活中的数据（语音，图片，文本）转化成tensor形式</li>
+<li>2 - 建立或者选取一个预训练模型（模型训练阶段）<ul>
+<li>选取损失函数和优化器</li>
+<li>建立训练循环</li>
+</ul>
+</li>
+<li>3 - 让模型拟合数据并作预测（模型推理）</li>
+<li>4 - 评估模型（模型推理）</li>
+<li>5 - 在实验中提升模型性能</li>
+<li>6 - 保存或加载自己训练过的模型</li>
+</ul>
+</li>
+</ul>
+<p>这一节的主要了解六个步骤的过程，后续再深入讨论</p>
+<p><strong>Getting setup for the PyTorch Workflow module</strong></p>
+<pre><code class="language-python">what_were_covering=&#123;1 : &quot;data (prepare and load)&quot;,
+                    2 : &quot;build model&quot;,
+                    3 : &quot;fitting the model to data (training)&quot;,
+                    4 : &quot;making predictions and evaluting a model (inference)&quot;,
+                    5 : &quot;saving and loading a model&quot;,
+                    6 : &quot;putting it all together&quot;
+                   &#125;
+</code></pre>
+<p><code>torch.nn</code>包中有很多神经网络的层（Layer），我们了解完workflow之后的工作就是选取某些层组织起来变成一个神经网络</p>
+<p><strong>Creating a dataset with linear regression</strong></p>
+<ul>
+<li><p>Data</p>
+<ul>
+<li>数据可以是万物：<ul>
+<li>Excel spreadsheet 规范化的行列table</li>
+<li>Images of any kind 各种格式的图片</li>
+<li>Videos 视频</li>
+<li>Audio like songs or podcasts 音频</li>
+<li>DNA 基因序列</li>
+<li>Text 文本数据</li>
+</ul>
+</li>
+<li>ML的两部曲<ul>
+<li>1-数据转换成数字表示（编码）</li>
+<li>2-选取或构建模型寻找尽可能好的模式</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Linear regression</p>
+<ul>
+<li><p>通常是$Y&#x3D;a+bX$ 这种线性函数，a和b是参数，是模型需要学习的东西</p>
+</li>
+<li><pre><code class="language-python">import numpy as np
+import torch
+import pandas as pd
+import matplotlib.pyplot as plt
+from torch import nn
+#人为设定的weight,bias,假设这是数据的真实分布，我们用这个分布创建一些数据点
+weight=0.7
+bias=0.3
+
+start=0
+end=1
+step=0.02
+X=torch.arange(start,end,step).unsqueeze(dim=1)
+y=X*weight+bias
+X[:10],y[:10],len(X),len(y)
+
+#这就是一个典型的线性模型，X(features)和y(labels)之间是线性关系，但是在现实生活中，我们通常只能收集到很多y、X，然后去寻找它们之间的映射关系，weight和bias是训练出来的（未知）
+#取出这里的X和y就可以当成Model的输入，去寻找y=X*weight+bias的模式
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Creating training and test sets</strong></p>
+<ul>
+<li><p>把数据划分成<strong>训练集，验证集，测试集</strong></p>
+<ul>
+<li><p>训练集就像平常的课后作业，你有答案有题目，可以通过这种方式学习知识点</p>
+</li>
+<li><p>验证集就好像自己找了一张模拟卷，模拟考试一下，但是考试时没有答案（考试后可以对答案），通过模拟考试的结果不断调整自己的学习方法等宏观的东西</p>
+</li>
+<li><p>测试集就好比最终的高考，三年磨一剑，最终只测试一次，不能根据测试的性能去调参</p>
+</li>
+<li><blockquote>
+<p>显然<strong>验证集和测试集</strong>都是模型训练的未见数据，因为训练Model的目的就是使其具有强的泛化能力（就像人可以读没有读过的书，写没有出现过的文章），即对于未见数据理解作答的能力。而验证集和测试集的唯一区别就是，验证集是用来微调模型的模式（<strong>比如超参数，防止过拟合，模型选择等</strong>），以取得更高的正确率或者其他指标，而测试集是现实生活中的任何未见数据是整个模型即将迈入使用的最后一步。</p>
+</blockquote>
+</li>
+<li><p>Training,Validation,Testing通常占比是60-80,10-20,10-20，Validation不是必须的但是通常都有，这里的重点是PyTorch编程，所以使用了简单的数据，也使用了最简单的建模，可以忽略validation，但是在现实实践中，通常这个是不可或缺的。</p>
+</li>
+<li><pre><code class="language-python">#对于上面的数据我们需要给TrainSet分配40个样本，给TestSet分配10个样本，下面是一个不太严谨但是很简单易懂的划分，可能实际还需要K折验证，随机划分等手段切分数据集
+train_split=int(0.8*len(X))
+X_train,y_train=X[:train_split],y[:train_split]
+X_test,y_test=X[train_split:],y[train_split:]
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>可视化函数</p>
+<ul>
+<li><p>将数据展示出来，使用plt制图</p>
+</li>
+<li><pre><code class="language-python">def plot_predictions(train_data=X_train,
+                     train_labels=y_train,
+                     test_data=X_test,
+                     test_labels=y_test,
+                     predictions=None):
+    plt.figure(figsize=(10,7))#创建图形窗口
+    
+    plt.scatter(train_data,train_labels,c=&quot;b&quot;,s=4,label=&quot;Training data&quot;)#scatter是散点图，c是颜色，label是标签，xy轴，plt.plot是折线图
+    
+    plt.scatter(test_data,test_labels,c=&quot;g&quot;,s=4,label=&quot;Testing data&quot;)
+    
+    if predictions is not None:
+        plt.scatter(test_data,predictions,c=&quot;r&quot;,s=4,label=&quot;Predicting data&quot;)
+    
+    plt.legend(prop=&#123;&quot;size&quot;:14&#125;)#图例，必须是prop构造参数属性，不能把prop替换成其他
+    #plt.show()在Jupyter中会自动呈现就不需要显式调用
+    
+plot_predictions()
+</code></pre>
+</li>
+<li><p>数据分析师的格言”visualize,visualize,visualize”</p>
+</li>
+</ul>
+</li>
+<li><p>建立模型</p>
+<ul>
+<li><p><code>nn.Module</code> 是一个抽象类，提供了神经网络需要的所有基本功能：</p>
+<ul>
+<li><strong>参数管理</strong>：自动跟踪所有<strong>可训练参数</strong></li>
+<li><strong>层级组织</strong>：可以包含其他模块形成层次结构</li>
+<li><strong>设备移动</strong>：方便在 <strong>CPU&#x2F;GPU</strong> 之间移动</li>
+<li><strong>序列化</strong>：支持模型的保存和加载</li>
+</ul>
+</li>
+<li><pre><code class="language-python">class LinearRegressionModel(nn.Module):
+    
+    def __init__(self):
+        super().__init__()
+        self.weights=nn.Parameter(torch.randn(1,requires_grad=True,dtype=torch.float32))
+        self.bias=nn.Parameter(torch.randn(1,requires_grad=True,dtype=torch.float32))#初始化为随机值，因为确实不知道具体的映射关系，梯度grad用于梯度下降调整参数weights和bias
+        
+    def forward(self,x: torch.Tensor) -&gt; torch.Tensor:#这是类型注解方便理解和编辑器报错，实际写成def forward(self,x):也是一样的结果
+        return self.weights*x+self.bias#线性函数，这里不知道原始数据是线性的，刚好尝试用线性回归去拟合一批数据，再去看拟合效果如何
+</code></pre>
+<ul>
+<li>rand和randn的分布不同，rand是0-1的均匀分布，randn是均值为0的标准正态分布</li>
+</ul>
+</li>
+<li><p>梯度下降与反向传播</p>
+<ul>
+<li>通俗来讲梯度的作用就是基于损失函数，让参数往一个方向变化，使得损失函数下降最快，这个方向由损失函数对参数求导求得即梯度</li>
+<li>反向传播就是利用求导的链式法则，把最外层的导数一层一层传递进入内层</li>
+<li>这一部分不多赘述可以阅读相关材料理解，PyTorch有内置实现，只需要了解算法原理即可</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Discussing important model building class</strong></p>
+<ul>
+<li><p><code>torch.nn</code>包含了计算图的所有构建模块，神经网络本身就是一个计算图</p>
+</li>
+<li><p><code>torch.nn.Prameter</code>模型应该学习的参数，<code>torch.nn</code>的一些layer会为我们设置好</p>
+</li>
+<li><p><code>torch.nn.Module</code>是所有神经网络模块的基类，子类化它就必须要复写forward</p>
+</li>
+<li><p><code>torch.optim</code>是优化器，查看梯度后，选择一些算法进行参数的更新操作</p>
+</li>
+<li><p><code>def forward()</code>所有<code>nn.Module</code>子类需要覆盖的函数，它定义了前向传播的具体形式</p>
+</li>
+<li><p><code>torch.utils.data.Dataset</code></p>
+</li>
+<li><p><code>torch.utils.data.DataLoader</code></p>
+</li>
+</ul>
+<p><strong>Checking out the internals of our model</strong></p>
+<blockquote>
+<p>详细的PyTorch包组件可查阅<a target="_blank" rel="noopener" href="https://docs.pytorch.org/tutorials/index.html">PyTorch Tutorial</a></p>
+</blockquote>
+<ul>
+<li>Get data ready<ul>
+<li><code>torchvision.transforms</code></li>
+<li><code>torch.utils.data.Dataset</code></li>
+<li><code>torch.utils.data.DataLoader</code></li>
+</ul>
+</li>
+<li>Build or pick a pretrained model<ul>
+<li><code>torch.optim</code></li>
+<li><code>torch.nn</code></li>
+<li><code>torch.nn.Module</code></li>
+<li><code>torchvision.models</code></li>
+</ul>
+</li>
+<li>Evaluate the model<ul>
+<li><code>torchmetrics</code></li>
+</ul>
+</li>
+<li>Improve through experimentation<ul>
+<li><code>torch.utils.tensorboard</code></li>
+</ul>
+</li>
+</ul>
+<p>使用<code>.parameters()</code>可以直接获取model的参数，使用<code>state_dict</code>也是类似作用但是提供了名字</p>
+<pre><code class="language-Python">torch.manual_seed(42)
+
+model_0=LinearRegressionModel()
+list(model_0.parameters())
+#[Parameter containing:tensor([0.3367], requires_grad=True),Parameter containing:tensor([0.1288], requires_grad=True)]
+model_0.state_dict()#可以获取参数名和值的映射
+#OrderedDict([(&#39;weights&#39;, tensor([0.3367])), (&#39;bias&#39;, tensor([0.1288]))])
+</code></pre>
+<p><strong>Making predictions with our model</strong></p>
+<ul>
+<li><p><code>torch.inference_mode()</code>可以用来进入推理模式，进行预测</p>
+<ul>
+<li><p>推理模式关闭了一系列的事物，比如梯度的追踪，或者有些层在推理和训练的过程中的表现是不一样的(Dropout)</p>
+</li>
+<li><p>当数据输入模型后背后运转的方式是依次调用<code>forward</code>方法</p>
+</li>
+<li><pre><code class="language-python">with torch.inference_mode():
+    y_preds=model_0(X_test)#一次预测
+#with语句用于创建一个临时的上下文环境，在这个环境中执行代码块，然后自动清理资源
+#torch.inference_mode()函数相当于进入模型推理阶段（返回的是一个上下文管理器对象，所以必须与with联动），后续的模型不会计算梯度
+plot_predictions(predictions=y_preds)#绘制带预测的散点图
+</code></pre>
+</li>
+<li><p>还有一种很类似的比较老的方法<code>with torch.no_grad():</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Training a model with PyTorch (intuition building)</strong></p>
+<p>在训练过程中衡量预测值和真实值之间的差距使用损失函数<strong>loss function</strong></p>
+<p>分类问题可以选取<code>torch.nn.BCELoss()</code>等，回归问题选取<code>torch.nn.L1Loss()</code>等</p>
+<p><strong>optimizer</strong>通过模型损失来调整参数(weights 和bias)</p>
+<p>所以我们需要一个Training Loop和Testing Loop</p>
+<p><strong>Setting up a loss function and optimizer with PyTorch</strong></p>
+<p>PyTorch有内置的很多个损失函数也有很多个优化器，可以具体参考文档</p>
+<ul>
+<li><p>L1 loss &amp; SGD Optimizer</p>
+<ul>
+<li><p>$f(x,y)&#x3D;\frac{1}{n}\sum_{i&#x3D;1}^n|x_i-y_i|$</p>
+</li>
+<li><p>两种方式求得L1 loss</p>
+<ul>
+<li><code>MAE_Loss=torch.mean(torch.abs(y_pred-y_test))</code>自己手动实现的版本</li>
+<li><code>MAE_Loss=torch.nn.L1Loss</code>使用内置版本</li>
+</ul>
+</li>
+<li><p><code>torch.optim.SGD</code>有两个参数，一个是需要跟踪优化的参数，另一个是学习率（是一种超参数）</p>
+</li>
+<li><pre><code class="language-python">loss_fn=nn.L1Loss()
+optimizer=torch.optim.SGD(params=model_0.parameters(),
+                         lr=0.01)
+#Loss function&amp;optimizer这两个一定是配合运作的
+#学习率是参数变化的幅度，越大参数变化幅度越大，越小变化幅度越小
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>PyTorch training loop and testing loop</strong></p>
+<p>Training loop的基本步骤</p>
+<ol start="0">
+<li>Loop through the data</li>
+<li>Forward pass (Forward propagation)</li>
+<li>Calculate the loss </li>
+<li>Optimizer zero grad</li>
+<li>Loss backward - move backward through</li>
+<li>Optimizer step - use optimizer to adjust the parameters</li>
+</ol>
+<p>Testing loop的基本步骤</p>
+<ol>
+<li>Forward pass</li>
+<li>Calculate the loss</li>
+<li>Calculate evaluation metrics(optional)</li>
+</ol>
+<p>对于测试阶段，我们不改变参数的值也无需反向传播和优化器步骤，我们只关心它的预测结果以及一些指标</p>
+<pre><code class="language-python">epochs=100#100轮训练
+train_loss_values = []#用来跟踪训练损失
+test_loss_values = []#用来跟踪测试损失
+epoch_count = []#轮数
+
+for epoch in range(epochs):
+    model_0.train() #设置成训练模式，把所有参数都设置成grad_required
+    y_pred=model_0(X_train)#前向传递
+    
+    loss=loss_fn(y_pred,y_train)#损失计算
+    
+    optimizer.zero_grad()#梯度置零，因为在backward中每个参数的梯度属性值会累积，在某些常会会用到累积的梯度，但是这里不用
+    #所以zero_grad必须在backward之前，优化器只是根据计算图遍历所有的参数更改其内部的属性，它本身不保存梯度
+    
+    loss.backward()#梯度反向传递
+    
+    optimizer.step()#优化器优化参数
+    
+    model_0.eval()#调整成评估模式
+    
+    with torch.inference_mode():#进入推理模式
+        test_pred=model_0(X_test)
+        
+        test_loss=loss_fn(test_pred,y_test.type(torch.float32))
+        
+        if epoch%10==0:#十轮记录输出一次模型的状态
+            epoch_count.append(epoch)
+            train_loss_values.append(loss.detach().numpy)#detach()方法是让loss从计算图中分离出来创建一个新的张量与计算图断开连接，但是数据相同，从而不会影响到原来的计算图
+            test_loss_values.append(test_loss.detach().numpy())
+            print(f&quot;Epoch: &#123;epoch&#125; | MAE Train Loss: &#123;loss&#125; | MAE Test Loss: &#123;test_loss&#125; &quot;)
+        
+</code></pre>
+<ul>
+<li><code>model.train()</code>训练模式，启用Dropout 和BatchNorm的训练期行为</li>
+<li><code>model.eval()</code>评估模式，禁用Dropout 和BatchNorm的训练期行</li>
+<li><code>torch.inference_mode</code>推理模式，在<code>model.eval()</code>的基础上，禁用梯度的计算</li>
+<li>前两个是对象的方法，第三个是框架级别的方法</li>
+</ul>
+<pre><code class="language-python">plt.plot(epoch_count, train_loss_values, label=&quot;Train loss&quot;)#打印折线图
+plt.plot(epoch_count, test_loss_values, label=&quot;Test loss&quot;)
+plt.title(&quot;Training and test loss curves&quot;)
+plt.ylabel(&quot;Loss&quot;)
+plt.xlabel(&quot;Epochs&quot;)
+plt.legend();
+</code></pre>
+<p><strong>Making predictions with a trained PyTorch model (inference)</strong></p>
+<p>其实前面已经讲过了，基本类似</p>
+<ol>
+<li>把模型设置成<code>model.eval</code>其实<code>torch.inference_mode</code>已经可以完成这一步，但是为了代码的可理解性，最好还是这么写</li>
+<li><code>with torch.inference_mode()</code>推理模式上下文管理</li>
+<li>所有的预测都必须把数据和模型放在同一个设备上，比如同在GPU或CPU</li>
+</ol>
+<pre><code class="language-python">model_0.eval()
+
+with torch.inference_mode():
+  # model_0.to(device)
+  # X_test = X_test.to(device)
+  y_preds = model_0(X_test)
+plot_predictions(predictions=y_preds)
+</code></pre>
+<p><strong>Saving and loading a PyTorch model</strong></p>
+<p>有时候我们需要保存或者加载我们的模型，比如训练完的模型想移动到别的应用上或者给别人使用，训练一半的模型想加载继续训练，有三个方法需要知道</p>
+<ul>
+<li><code>torch.save</code> 把对象序列化后（使用pickle python的序列化工具）保存到磁盘，模型张量和变量都可以使用这个方法保存</li>
+<li><code>torch.load</code>这是一个反序列化操作，把序列化的对象文件加载进内存，可以设置什么设备加载这个对象</li>
+<li><code>torch.nn.Module.load_state_dict</code>加载模型的参数字典可以使用<code>state_dict</code>对象，当生产环境和研究中，模型很大通常只保存参数，所以<code>load_state_dict</code>的功能并没有被上面两种方法覆盖，但是需要先创建一个跟原始模型一模一样的model对象再加载参数（最推荐的方式）</li>
+<li>使用<code>torch.save(obj=model.state_dict(),f=&quot;...&quot;)</code>保存模型</li>
+<li>使用<code>xxxmodel.load_state_dict(torch.load(f))</code>加载模型<ul>
+<li><code>torch.load</code>只负责把源文件反序列化成对象<code>OrderedDict</code></li>
+<li>接着把对象传递给<code>load_state_dict()</code>方法</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-python">from pathlib import Path
+
+MODEL_PATH = Path(&quot;models&quot;)#只创建Path路径对象，指向&quot;models&quot;目录
+MODEL_PATH.mkdir(parents=True, exist_ok=True)#创建models目录，如果父目录不存在也一起创建，如果存在就不报错
+
+# 创建模型存放的路径
+MODEL_NAME = &quot;01_pytorch_workflow_model_0.pth&quot;
+MODEL_SAVE_PATH = MODEL_PATH / MODEL_NAME
+
+# 保存模型的字典，save读取两个参数，一个是模型`state_dict()`获取的字典对象，一个是保存的路径
+print(f&quot;Saving model to: &#123;MODEL_SAVE_PATH&#125;&quot;)
+torch.save(obj=model_0.state_dict(), # 只保存学习到的参数
+           f=MODEL_SAVE_PATH) 
+
+#!ls -l models/01_pytorch_workflow_model_0.pth
+#可以查看是否保存成功
+
+# 实例化一个新的模型，此时参数的随机初始化的
+loaded_model_0 = LinearRegressionModel()
+
+#使用保存的参数进行更新，此时的参数就是之前训练好的参数
+loaded_model_0.load_state_dict(torch.load(f=MODEL_SAVE_PATH))
+
+# 改变成评估模式
+loaded_model_0.eval()
+
+# 模型推理上下文管理器做预测
+with torch.inference_mode():
+    loaded_model_preds = loaded_model_0(X_test)
+    
+# 可以比较加载的模型预测结果和原先的模型预测结果，发现一模一样
+y_preds == loaded_model_preds
+</code></pre>
+<p><strong>完整代码如下</strong></p>
+<pre><code class="language-python">import torch
+import numpy as np
+import pandas as pd 
+from torch import nn
+import matplotlib.pyplot as plt
+
+device = &quot;cuda&quot; if torch.cuda.is_available() else &quot;cpu&quot;
+
+weight = 0.7
+bias = 0.3
+
+start=0
+end=1
+step=0.02
+X=torch.arange(start,end,step,dtype=torch.float32).unsqueeze(dim=1)
+y=X*weight+bias
+
+train_split=int(0.8*len(X))
+X_train=X[:train_split]
+y_train=y[:train_split]
+X_test=X[train_split:]
+y_test=y[train_split:]
+
+def plot_predictions(train_data=X_train,train_labels=y_train,test_data=X_test,
+                    test_labels=y_test,predictdata=None):
+    plt.figure(figsize=(10,7))
+    plt.scatter(train_data,train_labels,c=&quot;b&quot;,s=4,label=&quot;Train_data&quot;)
+    plt.scatter(test_data,test_labels,c=&#39;g&#39;,s=4,label=&quot;Test_data&quot;)
+    if predictdata is not None:
+        plt.scatter(test_data,predictdata,c=&#39;r&#39;,s=4,label=&quot;Predictions&quot;)
+    plt.legend(prop=&#123;&quot;size&quot;:14&#125;)
+    
+class LinearRegressionModelV2(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.linear_layer=nn.Linear(in_features=1,out_features=1)
+
+    def forward(self,x : torch.Tensor) -&gt; torch.Tensor:
+        return self.linear_layer(x)
+
+torch.manual_seed(42)
+model_1=LinearRegressionModelV2()
+model_1.to(device)
+
+loss_fn=nn.L1Loss()
+optimizer=torch.optim.SGD(params=model_1.parameters(),lr=0.01)
+
+torch.manual_seed(42)
+
+epochs=1000
+X_train=X_train.to(device)
+X_test=X_test.to(device)
+y_train=y_train.to(device)
+y_test=y_test.to(device)
+
+for epoch in range(epochs):
+    model_1.train()
+
+    y_pred=model_1(X_train)
+
+    loss=loss_fn(y_pred,y_train)
+
+    optimizer.zero_grad()
+
+    loss.backward()
+
+    optimizer.step()
+
+    model_1.eval()
+
+    with torch.inference_mode():
+        y_pre=model_1(X_test)
+
+        test_loss=loss_fn(y_pre,y_test)
+
+    if epoch%100==0:
+        print(f&quot;Epoch:&#123;epoch&#125;|Train loss:&#123;loss&#125;|Test loss:&#123;test_loss&#125;&quot;)
+        
+model_1.eval()
+
+with torch.inference_mode():
+    y_pred=model_1(X_test)
+plot_predictions(predictdata=y_pred.cpu())
+
+from pathlib import Path
+
+MODULE_PATH=Path(&quot;models&quot;)
+MODULE_PATH.mkdir(parents=True,exist_ok=True)
+
+MODULE_NAME=&quot;myfirst.pth&quot;
+MODULE_SAVE_PATH=MODULE_PATH / MODULE_NAME
+
+torch.save(obj=model_1.state_dict(),f=MODULE_SAVE_PATH)
+
+model_2=LinearRegressionModelV2()
+model_2.load_state_dict(torch.load(MODULE_SAVE_PATH))
+model_2.to(device)
+model_2.eval()
+
+with torch.inference_mode():
+    yload=model_2(X_test)
+
+yload==y_pred
+</code></pre>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2025 My Blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Xpyyyy
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
